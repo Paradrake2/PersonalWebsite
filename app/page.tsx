@@ -6,6 +6,7 @@ export default function Home() {
     <body>
       <Navbar />
       <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
         <h1 className="text-4xl font-bold">Hello, I'm Leo Goldstein </h1>
         <p className="mt-2 text-lg">Aspiring Software Developer</p>
         <p className="mt-2 text-lg">This website is under construction right now</p>
