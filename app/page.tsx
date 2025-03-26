@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <body>
       <Navbar />
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+      <div className="flex flex-col h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <h1 className="text-4xl font-bold">Hello, I'm Leo Goldstein </h1>
         <p className="mt-2 text-lg">Aspiring Software Developer</p>

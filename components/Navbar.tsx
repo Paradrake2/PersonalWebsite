@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
-        <nav className="bg-gray-800 text-white py-4 px-8 w-full fixed top-0 left-0">
-            <div className="max-w-7xl mx-auto flex items-center">
+        <nav className="bg-gray-800 text-white py-4 px-8 w-full top-0 left-0">
+            <div className="max-auto mx-auto flex items-center">
                 {/* Left: Home Link */}
                 <div className="flex-none">
                     <Link href="/" className="text-2xl font-bold">Home Page</Link>
