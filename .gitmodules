@@ -1,3 +1,6 @@
 [submodule "app/components/textgame"]
 	path = app/components/textgame
 	url = https://github.com/Paradrake2/TextAdventureGame
+[submodule "app/components/turingmachine"]
+	path = app/components/turingmachine
+	url = https://github.com/Paradrake2/TuringMachineProject
