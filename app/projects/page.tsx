@@ -23,7 +23,7 @@ export default function Home() {
                     <a href="https://github.com/Paradrake2/TextAdventureGame" className="block w-full">
                         <div className="group">
                             <p className="text-lg font-bold"> Project 2: Text Adventure game</p>
-                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is going to be a playable text adventure fantasy game.</p>
+                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is going to be a playable text adventure fantasy game. Currently on indefinite hiatus.</p>
                         </div>
                     </a>
                 </div>
@@ -33,6 +33,15 @@ export default function Home() {
                         <div className="group">
                             <p className="text-lg font-bold"> Project 3: Turing machine simulator</p>
                             <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is just a simple turing machine simulator I made to help myself understand how they work for school.</p>
+                        </div>
+                    </a>
+                </div>
+                <br></br>
+                <div className="group w-96 mx-10 bg-black text-white px-6 py-1 rounded-lg transition-all duration-500 hover:bg-gray-600 cursor-pointer">
+                    <a href="https://github.com/Paradrake2/CraftingDungeonCrawler" className="block w-full">
+                        <div className="group">
+                            <p className="text-lg font-bold"> Project 4: Unity game</p>
+                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is the extended version of the text adventure game, made in an actual game engine. This repo contains the assets for the game.</p>
                         </div>
                     </a>
                 </div>
