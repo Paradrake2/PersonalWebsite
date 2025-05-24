@@ -36,6 +36,14 @@ export default function Home() {
                         </div>
                     </a>
                 </div>
+                <div className="group w-96 mx-10 bg-black text-white px-6 py-1 rounded-lg transition-all duration-500 hover:bg-gray-600 cursor-pointer">
+                    <a href="https://github.com/Paradrake2/CraftingDungeonCrawler" className="block w-full">
+                        <div className="group">
+                            <p className="text-lg font-bold"> Project 4: Unity crafting game</p>
+                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is the extended version of the text adventure game, made using unity. <video link></p>
+                        </div>
+                    </a>
+                </div>
                 <br></br>
                 <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
                     <Link href="/projects/textgame" className=""> Text Game</Link>
