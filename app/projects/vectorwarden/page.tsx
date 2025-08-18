@@ -4,9 +4,12 @@ export default function Home() {
     return (
         <body>
             <Navbar />
-            <p className="text-4xl text-white font-bold text-left px-10 py-5">Vector Warden</p>
-            <div className="flex flex-row h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
-                <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is my original game called Vector Warden. It is a top down 2d shooter roguelite.</p>
+            <div className="bg-black">
+                <p className="text-4xl text-white font-bold text-left px-10 py-5">Vector Warden</p>
+                <p className="text-white">This is my original game called Vector Warden. It is a top down 2d shooter roguelite.</p>
+            </div>
+            <div className="flex flex-row flex-wrap h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
+<br></br>
                 <iframe
                     width="560"
                     height="315"
@@ -15,7 +18,7 @@ export default function Home() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                ></iframe>
+                    ></iframe>
                 <iframe
                     width="560"
                     height="315"
@@ -24,7 +27,7 @@ export default function Home() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                ></iframe>
+                    ></iframe>
                 <iframe
                     width="560"
                     height="315"
@@ -33,7 +36,7 @@ export default function Home() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                ></iframe>
+                    ></iframe>
                 <iframe
                     width="560"
                     height="315"
@@ -42,7 +45,7 @@ export default function Home() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                ></iframe>
+                    ></iframe>
             </div>
         </body>
     )
