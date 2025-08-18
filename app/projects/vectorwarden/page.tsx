@@ -4,8 +4,8 @@ export default function Home() {
     return (
         <body>
             <Navbar />
+            <p className="text-4xl text-white font-bold text-left px-10 py-5">Vector Warden</p>
             <div className="flex flex-row h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
-                <p className="text-4xl text-white font-bold text-left px-10 py-5">Vector Warden</p>
                 <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is my original game called Vector Warden. It is a top down 2d shooter roguelite.</p>
                 <iframe
                     width="560"
