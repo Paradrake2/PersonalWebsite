@@ -96,6 +96,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
                 <div>
                     <h1>Image to Enemy Project</h1>
+                    <p>This is a school project. It will take images, identify the focus object in the image, and based on that generate stats for it as if it were an enemy in a video game using a ChatGPT wrapper.</p>
                 </div>
                 <h1 className="text-2xl font-bold">Image to Enemy Converter</h1>
                 <form onSubmit={upload} className="flex flex-col items-center mt-4">
