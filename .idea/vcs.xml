@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/components/textgame" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/components/turingmachine" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/components/textgame" vcs="Git" />
   </component>
 </project>
