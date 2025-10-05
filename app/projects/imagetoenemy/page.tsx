@@ -98,6 +98,9 @@ export default function Home() {
                 <div>
                     <p className="text-sm"> Note: please do not spam it. I did not implement a way to prevent you from using up all my credits. It will not automatically buy more credits, so once its out of credits, it will no longer work. Please be nice.</p>
                 </div>
+                <div>
+                    <p className="text-sm">Right now it doesn't work all the time in production due to vercel limiting the time a function can take to execute. Dunno how to fix that yet. Does work locally though.</p>
+                </div>
                 <h1 className="text-2xl font-bold">Image to Enemy Converter</h1>
                 <form onSubmit={upload} className="flex flex-col items-center mt-4">
                     <div ref={dropzoneRef} onClick={openPicker} className="w-64 h-64 border-4 border-dashed border-gray-600 rounded-lg flex items-center justify-center cursor-pointer hover:border-blue-500">
