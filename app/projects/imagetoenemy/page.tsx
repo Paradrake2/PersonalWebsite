@@ -46,12 +46,32 @@ export default function Home() {
         try {
             const form = new FormData();
             form.append("image", file);
+        
             const r = await fetch("/api/ai", { method: "POST", body: form });
-            const data: UploadResult = await r.json();
-            if (!r.ok) throw new Error(data.error || "Upload failed");
-            setResult(data);
-        } catch (error) {
-            setErr(String(error));
+        
+            const ct = r.headers.get("content-type") || "";
+            const raw = await r.text();
+        
+            let data: any;
+            if (ct.includes("application/json")) {
+            try {
+                data = JSON.parse(raw);
+            } catch (e) {
+                // JSON said it was JSON but failed to parse
+                throw new Error("Bad JSON from server.");
+            }
+        } else {
+          // plain text/HTML error page from upstream
+          throw new Error(raw.slice(0, 500)); // show first 500 chars
+        }
+
+        if (!r.ok || !data?.ok) {
+            throw new Error(data?.error || "Upload failed");
+        }
+
+        setResult(data);
+        } catch (error: any) {
+            setErr(String(error?.message || error));
         } finally {
             setLoading(false);
         }
@@ -81,7 +101,7 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">Image to Enemy Converter</h1>
                 <form onSubmit={upload} className="flex flex-col items-center mt-4">
                     <div ref={dropzoneRef} onClick={openPicker} className="w-64 h-64 border-4 border-dashed border-gray-600 rounded-lg flex items-center justify-center cursor-pointer hover:border-blue-500">
-                        <p className = "mb-2">Drag and drop an image here, or click to select</p>
+                        <p className = "mb-2">Click to select image</p>
                         <p className = "text-sm opacity-80">PNG, JPG, GIF up to 10MB</p>
                         <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onInputChange} />
                     </div>
