@@ -67,6 +67,9 @@ export default function Home() {
                 <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
                     <Link href="/projects/imagetoenemy" className=""> Image to Enemy</Link>
                 </div>
+                <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
+                    <Link href="/projects/capstone" className=""> Capstone Project</Link>
+                </div>
             </div>
         </body>
     );
