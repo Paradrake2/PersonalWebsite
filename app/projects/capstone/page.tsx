@@ -8,9 +8,9 @@ export default function Home() {
                 <p className="text-4xl text-white font-bold text-left px-10 py-5">Capstone Project</p>
             </div>
             <div className="flex flex-col min-h-screen bg-gradient-to-r from-black to-purple-500 p-10 text-white">
-                <p className="text-lg mb-8">Download my capstone project below.</p>
+                <p className="text-lg mb-8">Download my capstone project below. Instructions are included in the zip file.</p>
                 <a
-                    href="/capstone.pdf"
+                    href="/CapstoneProject_LeoGoldstein.zip"
                     download
                     className="w-fit bg-black text-white font-bold px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-600"
                 >
