@@ -20,10 +20,10 @@ export default function Home() {
                 </div>
                 <br></br>
                 <div className="group w-96 mx-10 bg-black text-white px-6 py-1 rounded-lg transition-all duration-500 hover:bg-gray-600 cursor-pointer">
-                    <a href="https://github.com/Paradrake2/TextAdventureGame" className="block w-full">
+                    <a href="https://github.com/Paradrake2/ArrowCube" className="block w-full">
                         <div className="group">
-                            <p className="text-lg font-bold"> Project 2: Text Adventure game</p>
-                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is going to be a playable text adventure fantasy game. Currently on indefinite hiatus.</p>
+                            <p className="text-lg font-bold"> Project 2: 3D Arrow Cube Logic Puzzle</p>
+                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is a 3D logic puzzle game involving an arrow cube. Solve the puzzles by removing arrows in the correct order..</p>
                         </div>
                     </a>
                 </div>
@@ -37,35 +37,11 @@ export default function Home() {
                     </a>
                 </div>
                 <br></br>
-                <div className="group w-96 mx-10 bg-black text-white px-6 py-1 rounded-lg transition-all duration-500 hover:bg-gray-600 cursor-pointer">
-                    <a href="https://github.com/Paradrake2/CraftingDungeonCrawler" className="block w-full">
-                        <div className="group">
-                            <p className="text-lg font-bold"> Project 4: Unity game</p>
-                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">!!CURRENTLY ON HOLD DUE TO LACK OF ART ASSETS!!   This is the extended version of the text adventure game, made in an actual game engine. This repo contains the assets for the game.</p>
-                        </div>
-                    </a>
-                </div>
-                <br></br>
-                <div className="group w-96 mx-10 bg-black text-white px-6 py-1 rounded-lg transition-all duration-500 hover:bg-gray-600 cursor-pointer">
-                    <a href="https://github.com/Paradrake2/VectorWarden" className="block w-full">
-                        <div className="group">
-                            <p className="text-lg font-bold"> Project 5: Vector Warden</p>
-                            <p className="mt-2 text-sm max-h-0 opacity-0 group-hover:max-h-40 group-hover:opacity-100 overflow-hidden transition-all duration-300">This is my original game called Vector Warden. It is a top down 2d shooter roguelite.</p>
-                        </div>
-                    </a>
-                </div>
-                <br></br>
-                <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
-                    <Link href="/projects/textgame" className=""> Text Game</Link>
-                </div>
                 <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
                     <Link href="/projects/turingmachine" className=""> Turing machine simulator</Link>
                 </div>
                 <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
-                    <Link href="/projects/vectorwarden" className=""> Vector Warden</Link>
-                </div>
-                <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
-                    <Link href="/projects/imagetoenemy" className=""> Image to Enemy</Link>
+                    <Link href="https://paradrake2.itch.io/arrowcube" className=""> 3D Arrow Cube Logic Puzzle</Link>
                 </div>
                 <div className="px-6 py-1 rounded-lg w-auto mx-10 hover:text-gray-300">
                     <Link href="/projects/capstone" className=""> Capstone Project</Link>

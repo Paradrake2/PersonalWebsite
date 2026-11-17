@@ -36,7 +36,7 @@ function parseJsonFromText(text: string) {
 export async function POST(req: Request) {
     try {
     if (!process.env.OPENAI_API_KEY) {
-        return NextResponse.json({ ok: false, error: "Missing OPENAI_API_KEY" }, { status: 500 });
+        return NextResponse.json({ ok: false, error: "Missing OPENAI_API_KEY" }, { status: 500 }); // Misconfig for api key
     }
 
     const form = await req.formData();
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     if (!file.type.startsWith("image/")) {
         return NextResponse.json({ ok: false, error: "File must be an image" }, { status: 400 });
     }
-    const MAX = 10 * 1024 * 1024;
+    const MAX = 10 * 1024 * 1024; // 10MB
     if (file.size > MAX) {
         return NextResponse.json({ ok: false, error: "Image too large (10MB max)" }, { status: 400 });
     }
@@ -58,7 +58,6 @@ export async function POST(req: Request) {
     const b64 = bytes.toString("base64");
     const dataUrl = `data:${file.type};base64,${b64}`;
 
-    // Define the JSON schema your Unity importer expects
     const enemyJsonSchema = {
         name: "enemy_schema",
         schema: {
@@ -129,19 +128,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: e?.message ?? "Unknown error" }, { status: 500 });
     }
 }
-/*
-    return NextResponse.json(
-        {
-        ok: true,
-        filename: file.name,
-        sizeBytes: file.size,
-        enemy
-        },
-        { status: 200 }
-    );
-    
-    } catch (e: any) {
-    return NextResponse.json({ ok: false, error: e?.message ?? "Unknown error" }, { status: 500 });
-    }
-    }
-*/
