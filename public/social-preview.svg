@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#101211"/>
+  <path d="M76 76h8v35h-8z" fill="#c3f56b"/>
+  <text x="105" y="103" fill="#c3f56b" font-family="Arial,Helvetica,sans-serif" font-size="24" letter-spacing="3">LEO GOLDSTEIN / SOFTWARE DEVELOPER</text>
+  <text x="76" y="285" fill="#f2f4ee" font-family="Arial,Helvetica,sans-serif" font-size="80" font-weight="700" letter-spacing="-3">Curiosity. Code.</text>
+  <text x="76" y="389" fill="#c3f56b" font-family="Arial,Helvetica,sans-serif" font-size="77" font-weight="700" letter-spacing="-3">Something you can use.</text>
+  <path d="M76 483h1048" stroke="#343b31"/>
+  <text x="76" y="543" fill="#b1b9ac" font-family="Arial,Helvetica,sans-serif" font-size="26">Computer Science student at Purdue Indianapolis</text>
+</svg>

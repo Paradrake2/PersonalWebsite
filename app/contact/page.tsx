@@ -1,21 +1,6 @@
-import Navbar from "../components/Navbar";
-
-
-export default function Home() {
-    return (
-        <body>
-            <Navbar />
-            <div className="flex flex-col h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
-                <p className="text-4xl text-white font-bold text-left px-10 py-5">My contact information</p>
-                <div className="mt-5 flex flex-col space-y-4 items-start px-10">
-                    <p>Links</p>
-                    <a href="https://github.com/Paradrake2" className="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600">My GitHub</a>
-                    <a href="https://www.linkedin.com/in/leo-goldstein-1396a822a/" className="bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-600">My LinkedIn</a>
-                    <p>Information</p>
-                    <p>Email: thunderhawk103@gmail.com</p>
-                    <p>Phone number: 317-900-9068</p>
-                </div>
-            </div>
-        </body>
-    );
+import type { Metadata } from "next";
+import { profile } from "../lib/profile";
+export const metadata: Metadata = { title: "Contact" };
+export default function ContactPage() {
+  return <main id="main-content" className="page-shell"><header className="page-heading"><p className="eyebrow">Contact</p><h1>Good software starts<br /><span>with a conversation.</span></h1><p className="lead">Have an opportunity, a project idea, or a question about my work? Email is the best place to start.</p></header><div className="contact-grid"><a className="contact-card contact-primary" href={`mailto:${profile.email}`}><span className="eyebrow">Send an email</span><h2>Let’s talk.</h2><p>{profile.email}</p><span className="text-action">Open your email app</span></a><div className="contact-socials"><a className="contact-card" href={profile.linkedin}><h2>LinkedIn</h2><p>Connect with me professionally.</p><span className="text-action">View profile</span></a><a className="contact-card" href={profile.github}><h2>GitHub</h2><p>Explore my repositories and source code.</p><span className="text-action">View GitHub</span></a></div></div><section className="contact-strip"><div><p className="eyebrow">Résumé</p><h2>Want a closer look at my experience?</h2></div><a className="button button-secondary" href={profile.resume}>Request résumé by email</a></section></main>;
 }

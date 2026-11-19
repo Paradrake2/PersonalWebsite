@@ -1,17 +1,7 @@
-import Navbar from "../components/Navbar";
-
-export default function Home() {
-    return (
-        <body>
-            <Navbar />
-            <div className="flex flex-col h-screen bg-gradient-to-r from-black to-purple-500 p-6 text-white">
-                <div className="text-4xl text-white px-10 py-5 max-w-2xl">
-                    <p className="font-bold">Who am I?</p>
-                    <p className="text-lg leading-relaxed">My name is Leo Goldstein. I was born in Maryland and moved to Indiana when I was very young. I'm a student at Purdue Indianapolis pursuing a bachelor's in Computer Science. In my free time, I love to play video games such as Minecraft. I've always loved creating things, whether it be an enormous building online or with LEGOs as a kid. I also take time to hone my skills through various online courses. My eventual career goal is to become a software developer. </p>
-                    <br></br>
-                    <p className="text-lg leading-relaxed">The majority of my experience with computer science is through extracurriculars and projects, such as this site. I am proficient in Java, C#, C++, HTML, Next.js, TailwindCSS, and more. I have also dabbled with game development in Unity Engine.</p>
-                </div>
-            </div>
-        </body>
-    )
+import type { Metadata } from "next";
+import Link from "next/link";
+import { profile } from "../lib/profile";
+export const metadata: Metadata = { title: "About" };
+export default function AboutPage() {
+  return <main id="main-content" className="page-shell"><header className="page-heading"><p className="eyebrow">About me</p><h1>A builder at heart.<br /><span>A developer in the making.</span></h1><p className="lead">I’m Leo Goldstein, a Computer Science student at Purdue Indianapolis working toward a career in software development.</p></header><div className="about-layout"><section><h2>Learning through implementation.</h2><p>My strongest learning happens when I take an idea far enough to use it. I’m building a dice-driven Unity game, alongside a browser-playable logic puzzle and a Turing machine simulator, to better understand the concepts behind them.</p><p>I’m interested in the connection between a system’s rules and the experience it creates: how a reroll changes a turn, how a transition changes a tape, or how an API moves evidence through a review process.</p><p>I want to keep developing that judgment while contributing to useful software alongside other developers.</p><div className="actions"><Link className="button button-primary" href="/projects">Explore my work</Link><a className="button button-secondary" href={profile.resume}>Request résumé</a></div></section><aside className="education-card"><p className="eyebrow">Education</p><h2>Purdue Indianapolis</h2><p>Bachelor’s in Computer Science</p><span className="tag">In progress</span><hr /><p className="eyebrow">Focus</p><p>Software development, interactive applications, and learning how systems work.</p></aside></div><section className="evidence-section"><div className="section-heading"><div><p className="eyebrow">Skills in practice</p><h2>The work is the evidence.</h2></div></div><div className="evidence-grid"><Link href="/projects/untitleddicegame"><h3>Game systems</h3><p>Building a Unity game with dice rerolls, card loadouts, and turn-based combat.</p><span>Untitled Dice Game</span></Link><Link href="/projects/sec-incident-api"><h3>Backend workflows</h3><p>Contributed to a team coursework API for incident evidence and review.</p><span>SEC Incident API</span></Link><Link href="/projects/turingmachine"><h3>Interactive tools</h3><p>Implemented editable states and transition rules in a TypeScript simulator.</p><span>Turing Machine Simulator</span></Link></div></section></main>;
 }

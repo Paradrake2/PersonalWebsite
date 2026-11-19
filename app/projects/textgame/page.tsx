@@ -1,8 +1,2 @@
 import TextGame from "../../components/textgame/src/TextGame";
-export default function TextGamePage() {
-  return (
-    <div className="min-h-screen bg-black text-white font-mono p-4">
-      <TextGame />
-    </div>
-  );
-}
+export default function TextGamePage() { return <main id="main-content" className="page-shell game-page"><p className="eyebrow">Experimental browser game</p><TextGame /></main>; }

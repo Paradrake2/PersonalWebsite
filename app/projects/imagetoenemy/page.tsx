@@ -1,129 +1,53 @@
 "use client";
 
-import { useState, useRef,} from "react";
-import Navbar from "../../components/Navbar";
+import Image from "next/image";
+import { useEffect, useState, useRef } from "react";
+import { isEnemy, validateImage, type UploadResult } from "@/app/lib/ai-contract";
 
-type UploadResult = { ok: boolean; error?: string; message?: string; filename?: string; sizeBytes?: number; enemy?: any };
-
-
-export default function Home() {
-    const [msg, setMsg] = useState<string | null>(null);
-    const [err, setErr] = useState<string | null>(null);
-    const [file, setFile] = useState<File | null>(null);
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [result, setResult] = useState<UploadResult | null>(null);
-    const [loading, setLoading] = useState(false);
-
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const dropzoneRef = useRef<HTMLDivElement | null>(null);
-
-    const onPick = (f: File | null) => {
-        setResult(null);
-        setFile(f);
-        setErr(null);
-        if (previewUrl) URL.revokeObjectURL(previewUrl);
-        setPreviewUrl(f ? URL.createObjectURL(f) : null);
-
-        // allow selecting the same file again
-        if (fileInputRef.current) {
-            fileInputRef.current.value = "";
-        }
-    }
-    function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        if (e.target.files && e.target.files[0]) {
-            onPick(e.target.files[0]);
-        }
-    }
-
-    const openPicker = () => fileInputRef.current?.click();
-
-    async function upload(e: React.FormEvent) {
-        e.preventDefault();
-        if (!file) return;
-        setLoading(true);
-        setErr(null);
-        setResult(null);
-        try {
-            const form = new FormData();
-            form.append("image", file);
-        
-            const r = await fetch("/api/ai", { method: "POST", body: form });
-        
-            const ct = r.headers.get("content-type") || "";
-            const raw = await r.text();
-        
-            let data: any;
-            if (ct.includes("application/json")) {
-            try {
-                data = JSON.parse(raw);
-            } catch (e) {
-                // JSON said it was JSON but failed to parse
-                throw new Error("Bad JSON from server.");
-            }
-        } else {
-          // plain text/HTML error page from upstream
-          throw new Error(raw.slice(0, 500)); // show first 500 chars
-        }
-
-        if (!r.ok || !data?.ok) {
-            throw new Error(data?.error || "Upload failed");
-        }
-
-        setResult(data);
-        } catch (error: any) {
-            setErr(String(error?.message || error));
-        } finally {
-            setLoading(false);
-        }
-    }
-    async function ping() {
-        setMsg(""); setErr("");
-        try {
-            const r = await fetch("/api/ai");
-            const data = await r.json();
-            if (!r.ok) throw new Error(data.error || "Request failed");
-            setMsg(String(data.fromOpenAI));
-        } catch (error) {
-            setErr(String(error));
-        }
-    }
-    return (
-        <main>
-            <Navbar />
-            <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-                <div>
-                    <h1>Image to Enemy Project</h1>
-                    <p className="text-lg">This is a school project. It will take images, identify the focus object in the image, and based on that generate a JSON file that can be converted into an enemy in Unity.</p>
-                </div>
-                <div>
-                    <p className="text-sm"> Note: please do not spam it. I did not implement a way to prevent you from using up all my credits. It will not automatically buy more credits, so once its out of credits, it will no longer work. Please be nice.</p>
-                </div>
-                <div>
-                    <p className="text-sm">Right now it doesn't work all the time in production due to vercel limiting the time a function can take to execute. Dunno how to fix that yet. Does work locally though.</p>
-                </div>
-                <h1 className="text-2xl font-bold">Image to Enemy Converter</h1>
-                <form onSubmit={upload} className="flex flex-col items-center mt-4">
-                    <div ref={dropzoneRef} onClick={openPicker} className="w-64 h-64 border-4 border-dashed border-gray-600 rounded-lg flex items-center justify-center cursor-pointer hover:border-blue-500">
-                        <p className = "mb-2">Click to select image</p>
-                        <p className = "text-sm opacity-80">PNG, JPG, GIF up to 10MB</p>
-                        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onInputChange} />
-                    </div>
-                    <button type="submit" disabled={!file || loading} className="self-start rounded-lg px-4 py-2 border border-gray-600 hover:border-gray-400 disabled:opacity-50">
-                        {loading ? "Uploading..." : "Upload Image"}
-                    </button>
-                </form>
-                {msg && <p className="mt-4 text-green-400">Response: {msg}</p>}
-                {err && <p className="mt-4 text-red-400">Error: {err}</p>}
-                {result?.ok && result.enemy && (
-                    <div className="mt-4 p-4 border border-green-400 rounded-lg max-w-md text-left">
-                        <h2 className="text-lg font-bold mb-2">Generated Enemy JSON:</h2>
-                        <pre className="bg-gray-800 p-2 rounded-lg overflow-x-auto"><code>{JSON.stringify(result.enemy, null, 2)}</code></pre>
-                        <a href = {`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result.enemy, null, 2))}`} download={result.filename ? result.filename.replace(/\.[^/.]+$/, ".json") : "enemy.json"} className="mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Download JSON
-                        </a>
-                    </div>
-                )}
-            </div>
-        </main>
-    );
+export default function ImageToEnemyPage() {
+  const [enabled, setEnabled] = useState<boolean | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [result, setResult] = useState<Extract<UploadResult, { ok: true }> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState("");
+  const controller = useRef<AbortController | null>(null);
+  useEffect(() => {
+    const abort = new AbortController();
+    fetch("/api/ai", { signal: abort.signal }).then(response => response.json()).then((status: unknown) => setEnabled(Boolean(status && typeof status === "object" && "enabled" in status && status.enabled === true))).catch(() => { if (!abort.signal.aborted) setEnabled(false); });
+    return () => { abort.abort(); controller.current?.abort(); };
+  }, []);
+  useEffect(() => {
+    if (!file) { setPreviewUrl(null); return; }
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+  function pick(selected: File | null) {
+    setError(null); setResult(null); setFile(null);
+    if (!selected) return;
+    const invalid = validateImage(selected);
+    if (invalid) { setError(invalid); return; }
+    setFile(selected);
+  }
+  async function upload(event: React.FormEvent) {
+    event.preventDefault();
+    if (!file || !enabled || loading) return;
+    setLoading(true); setError(null); setResult(null);
+    const abort = new AbortController(); controller.current = abort;
+    const timeout = setTimeout(() => abort.abort(), 25_000);
+    try {
+      const form = new FormData(); form.append("image", file);
+      const response = await fetch("/api/ai", { method: "POST", body: form, headers: token ? { "x-demo-token": token } : {}, signal: abort.signal });
+      const value: unknown = await response.json().catch(() => { throw new Error("The preview is temporarily unavailable. Please try again later."); });
+      if (!value || typeof value !== "object" || !("ok" in value)) throw new Error("The preview returned an unexpected response.");
+      if (!response.ok || value.ok !== true) throw new Error("error" in value && typeof value.error === "string" ? value.error : "The upload could not be completed.");
+      if (!("enemy" in value) || !isEnemy(value.enemy)) throw new Error("The preview returned an invalid enemy.");
+      setResult({ ok: true, enemy: value.enemy, filename: file.name, sizeBytes: file.size });
+    } catch (caught) {
+      setError(caught instanceof Error && caught.name === "AbortError" ? "The request timed out or was cancelled. Please try again." : caught instanceof Error ? caught.message : "The preview is temporarily unavailable.");
+    } finally { clearTimeout(timeout); controller.current = null; setLoading(false); }
+  }
+  return <main id="main-content" className="page-shell"><header className="page-heading"><p className="eyebrow">Experimental preview</p><h1>Image to Enemy</h1><p className="lead">A school project exploring how an image can become structured enemy data for a Unity game.</p></header><p className="notice" role="status">{enabled === null ? "Checking preview availability…" : enabled ? "Limited-access experiment. Images are sent to OpenAI for analysis. Use images you have permission to share, without personal or sensitive information." : "The live preview is currently disabled. This experiment converts an image’s main subject into a downloadable JSON definition with stats and behavior."}</p><form onSubmit={upload} className="upload-form" aria-busy={loading}><div className="upload-field"><label htmlFor="enemy-image">Choose an image</label><p id="image-hint">PNG, JPEG, or WebP · maximum 4 MB</p><input id="enemy-image" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="image-hint" disabled={!enabled || loading} onChange={event => { pick(event.target.files?.[0] ?? null); event.target.value = ""; }} /></div>{previewUrl && <Image src={previewUrl} alt="Preview of the image selected for enemy generation" width={640} height={400} unoptimized className="upload-preview" />}<div><label htmlFor="preview-token">Preview access code</label><input id="preview-token" type="password" value={token} onChange={event => setToken(event.target.value)} autoComplete="off" disabled={!enabled || loading} className="block mt-2 w-full rounded border border-gray-600 bg-transparent p-3" /><p className="mt-2 text-sm">Use the code provided for a supervised preview.</p></div><div className="actions"><button className="button button-primary" type="submit" disabled={!enabled || !file || loading}>{loading ? "Generating enemy…" : "Generate enemy JSON"}</button>{loading && <button className="button button-secondary" type="button" onClick={() => controller.current?.abort()}>Cancel</button>}</div></form>{error && <p role="alert" className="upload-error mt-6">{error}</p>}<div aria-live="polite">{result && <section className="upload-result"><h2>Generated enemy</h2><pre><code>{JSON.stringify(result.enemy, null, 2)}</code></pre><a className="button button-secondary" href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result.enemy, null, 2))}`} download="enemy.json">Download JSON</a></section>}</div></main>;
 }

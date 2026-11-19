@@ -1,7 +1,12 @@
  
 node_modules
 .next
+.next-dev
 .vercel
 .DS_Store
 .env.local
+.env*
+!.env.example
+*.tsbuildinfo
+artifacts/
 components/textgame

@@ -1,22 +1,3 @@
-import Navbar from "../../components/Navbar";
-
-export default function Home() {
-    return (
-        <body>
-            <Navbar />
-            <div className="bg-black">
-                <p className="text-4xl text-white font-bold text-left px-10 py-5">Capstone Project</p>
-            </div>
-            <div className="flex flex-col min-h-screen bg-gradient-to-r from-black to-purple-500 p-10 text-white">
-                <p className="text-lg mb-8">Download my capstone project below. Instructions are included in the zip file.</p>
-                <a
-                    href="/CapstoneProject_LeoGoldstein.zip"
-                    download
-                    className="w-fit bg-black text-white font-bold px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-600"
-                >
-                    Download Capstone Project
-                </a>
-            </div>
-        </body>
-    );
-}
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Capstone Project" };
+export default function CapstonePage() { return <main id="main-content" className="page-shell"><header className="page-heading"><p className="eyebrow">Project archive</p><h1>Capstone project</h1><p className="lead">Download the project files and read the accompanying instructions.</p><div className="actions"><a href="/CapstoneProject_LeoGoldstein.zip" download className="button button-primary">Download project ZIP</a><a href="/CapstoneProjectInstructions.pdf" className="button button-secondary">Read instructions (PDF)</a></div></header></main>; }

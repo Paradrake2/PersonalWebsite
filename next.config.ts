@@ -1,9 +1,9 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
-const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true, // ⬅️ Ignore ESLint errors during builds
-  },
-};
-
-export default nextConfig;
+export default function nextConfig(phase: string): NextConfig {
+  return {
+    // Build checks must not overwrite the chunks used by a running dev server.
+    distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
+  };
+}
